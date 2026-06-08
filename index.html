@@ -52,7 +52,7 @@ if (!IS_MOCK_MODE) {
 const appId = typeof __app_id !== 'undefined' ? __app_id : 'it-asset-survey-v1';
 
 // ----------------------------------------------------------------------
-// 2. 기준 정보 정의
+// 2. 기준 정보 정의 (조직도, 품목 구분 및 드롭다운 데이터)
 // ----------------------------------------------------------------------
 const DEPARTMENTS = [
   { id: "admin", upper: "관리자", team: "ADMIN", part: "관리자(ADMIN)" },
@@ -1176,7 +1176,7 @@ export default function App() {
               </div>
             </div>
 
-            {/* 메인 통합 데이터 그리드 리스트 테이블 */}
+            {/* 메인 데이터 테이블 */}
             <div className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl">
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse table-fixed min-w-[1750px]">
@@ -1229,6 +1229,7 @@ export default function App() {
                             <td className="py-3 px-3 truncate"><span className="text-[10px] text-slate-500 block">{asset.upperDept}</span><span className="font-medium text-slate-300">{asset.dept}</span></td>
                             <td className="py-3 px-3 truncate"><div className="text-slate-200 font-semibold">{asset.modelName}</div><div className="text-slate-500 text-[10px]">{asset.acquireDate}</div></td>
                             <td className="py-3 px-3 truncate"><span className="px-2 py-0.5 rounded bg-slate-950 border border-slate-800 text-slate-400">{asset.user || "공용"}</span></td>
+                            
                             <td className="py-3 px-3 bg-indigo-950/10"><input type="text" disabled={isDeptSubmitted} placeholder="현 파트명 입력" value={valSurveyDept} onChange={(e) => handleFieldChange(asset.assetNo, 'surveyDept', e.target.value)} className={`w-full bg-slate-950 border focus:border-indigo-500 rounded px-2 py-1 text-xs text-white disabled:opacity-50 ${!valSurveyDept ? 'border-rose-500/40 bg-rose-950/5' : 'border-slate-800'}`} /></td>
                             <td className="py-3 px-3 bg-indigo-950/10"><input type="text" disabled={isDeptSubmitted} placeholder="성명" value={valSurveyUser} onChange={(e) => handleFieldChange(asset.assetNo, 'surveyUser', e.target.value)} className={`w-full bg-slate-950 border focus:border-indigo-500 rounded px-2 py-1 text-xs text-white disabled:opacity-50 ${!valSurveyUser ? 'border-rose-500/40 bg-rose-950/5' : 'border-slate-800'}`} /></td>
                             <td className="py-3 px-3 bg-indigo-950/10">
@@ -1251,6 +1252,7 @@ export default function App() {
                             </td>
                             <td className="py-3 px-3 bg-indigo-950/10"><input type="text" disabled={isDeptSubmitted} placeholder="결재문서번호" value={valBasis} onChange={(e) => handleFieldChange(asset.assetNo, 'basis', e.target.value)} className="w-full bg-slate-950 border border-slate-800 focus:border-indigo-500 rounded px-2 py-1 text-xs text-white disabled:opacity-50" /></td>
                             <td className="py-3 px-3 bg-indigo-950/10"><input type="text" disabled={isDeptSubmitted} placeholder="특이 메모" value={valMemo} onChange={(e) => handleFieldChange(asset.assetNo, 'memo', e.target.value)} className="w-full bg-slate-950 border border-slate-800 focus:border-indigo-500 rounded px-2 py-1 text-xs text-white disabled:opacity-50" /></td>
+                            
                             <td className="py-3 px-3 text-center">
                               {asset.submitStatus ? (
                                 <span className={`px-2 py-0.5 rounded text-[9px] font-bold block ${asset.submitStatus === '제출완료' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-amber-500/10 text-amber-400 border-amber-500/20'}`}>{asset.submitStatus}</span>
